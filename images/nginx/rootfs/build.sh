@@ -397,6 +397,7 @@ WITH_FLAGS="--with-debug \
   --with-http_gunzip_module \
   --with-md5-asm \
   --with-sha1-asm \
+  --with-luajit-xcflags='-mno-sse4.2' \
   -j${CORES} "
 
 # "Combining -flto with -g is currently experimental and expected to produce unexpected results."
@@ -424,7 +425,7 @@ if [[ ${ARCH} != "aarch64" ]]; then
 fi
 
 if [[ ${ARCH} == "x86_64" ]]; then
-  CC_OPT+=' -m64 -mtune=native'
+  CC_OPT+=' -m64 -mtune=core2'
 fi
 
 WITH_MODULES="--add-module=$BUILD_PATH/nginx-http-auth-digest-$NGINX_DIGEST_AUTH \
